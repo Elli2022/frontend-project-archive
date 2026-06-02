@@ -2,7 +2,7 @@ import type { Profile } from "./types";
 
 export const profile: Profile = {
   name: "Eleonora Nocentini Sköldebrink",
-  handle: "Eleonora Field Notes",
+  handle: "Frontend Project Archive",
   title: "Frontend developer, web designer, and project rebuilder",
   location: "Malmo, Sweden",
   email: "eleonora.nocentini@gmail.com",

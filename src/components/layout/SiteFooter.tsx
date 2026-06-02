@@ -30,7 +30,7 @@ export function SiteFooter() {
       </div>
       <div className="container-wide py-6 border-t border-border flex items-center justify-between text-xs text-muted-foreground">
         <span className="font-mono">© {new Date().getFullYear()} {profile.handle}</span>
-        <span className="font-mono">v1.0 — field notes edition</span>
+        <span className="font-mono">v1.0 — project archive</span>
       </div>
     </footer>
   );

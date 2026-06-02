@@ -1,141 +1,150 @@
-# Eleonora Field Notes
+# Frontend Project Archive
 
-An editorial companion site to my main portfolio.
+A public companion site to my [main portfolio](https://eleonora-portfolio.netlify.app/). It documents frontend project rebuilds, smaller experiments, and short notes on cleanup, versioning, and presentation — the work that sits next to finished case studies.
 
-This project started from the strongest design direction inside the older private repo `code-sanctuary`, but it has been repurposed into something more honest and useful: a public site for project rebuilds, smaller frontend experiments, and short writing about cleanup, versioning, and presentation.
+**Live site:** [frontend-project-archive.netlify.app](https://frontend-project-archive.netlify.app/)
 
-## Why This Repo Exists
+## Overview
 
-My main portfolio is where I present finished work.
+| | |
+|---|---|
+| **Purpose** | Archive of rebuilds, demos, and process writing |
+| **Audience** | Recruiters, collaborators, and future me |
+| **Content model** | Typed local files — no CMS or backend |
+| **Deployment** | Netlify (SPA with client-side routing) |
 
-This repo exists for the layer around that:
+The main portfolio presents polished outcomes. This repository hosts the layer around that work: how older projects were refreshed, what changed, and which smaller public builds still say something about how I work.
 
-- rebuilds of older projects
-- notes on versioning and cleanup
-- smaller public demos that still say something about how I work
-- the thinking behind turning scattered repos into clearer case studies
+## Screenshots
 
-Instead of creating another competing portfolio, this site gives the editorial design a better home.
+### Home
 
-## Live Site
+Editorial landing page framing the site as a rebuild and experiment archive.
 
-- GitHub Pages: [elli2022.github.io/eleonora-field-notes](https://elli2022.github.io/eleonora-field-notes/)
+![Home page](./docs/screenshots/home.png)
 
-## What Is Included
+### Projects
 
-The site currently includes:
+Curated list of selected repositories with tags, summaries, and links to live demos.
 
-- a home page that frames the project as a process and rebuild archive
-- a projects section with selected real repos and live demos
-- a notes section with short writing about refactoring, hosting choices, and portfolio cleanup
-- an about page that explains the purpose of the site
-- a lightweight contact page that opens a prefilled email draft
+![Projects page](./docs/screenshots/projects.png)
 
-## Tech Stack
+### Project detail
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- React Router
-- Framer Motion
-- GitHub Pages
+Individual case view with context, stack, outcomes, and external links.
 
-## Routing Choice
+![Project detail page](./docs/screenshots/project-detail.png)
 
-The site uses `HashRouter` on purpose.
+### Notes
 
-Because the project is deployed on GitHub Pages, hash-based routing keeps deep links stable without needing server-side route handling or custom rewrite infrastructure.
+Short articles on refactoring, hosting choices, and portfolio cleanup.
 
-## Content Strategy
+![Notes page](./docs/screenshots/notes.png)
 
-All content lives in typed local files:
+### About
 
-- [src/content/profile.ts](./src/content/profile.ts)
-- [src/content/projects.ts](./src/content/projects.ts)
-- [src/content/posts.ts](./src/content/posts.ts)
-- [src/content/types.ts](./src/content/types.ts)
+Background, experience timeline, and how this site relates to other repos.
 
-That means:
+![About page](./docs/screenshots/about.png)
 
-- no CMS
-- no database
-- no second backend
-- easy version control for writing and project metadata
+## Features
 
-## Project Structure
+- **Projects** — Selected real repos with metadata, categories, and live demo links
+- **Notes** — Markdown-backed posts on process and technical decisions
+- **About & contact** — Site purpose, experience, and mailto contact flow
+- **Dark / light theme** — System-aware theme toggle
+- **Motion** — Subtle page transitions with Framer Motion
+- **Accessible layout** — Semantic structure, keyboard-friendly navigation
+
+## Tech stack
+
+| Layer | Choice |
+|---|---|
+| UI | React 18, TypeScript |
+| Build | Vite 5 |
+| Styling | Tailwind CSS, shadcn/ui primitives |
+| Routing | React Router (BrowserRouter) |
+| Content | Local typed modules in `src/content/` |
+| Animation | Framer Motion |
+| Hosting | Netlify |
+
+## Project structure
 
 ```text
-eleonora-field-notes/
+frontend-project-archive/
+├── docs/screenshots/     # README visuals
 ├── public/
 ├── src/
-│   ├── components/
-│   ├── content/
+│   ├── components/       # Layout, cards, UI primitives
+│   ├── content/          # Profile, projects, posts (source of truth)
 │   ├── pages/
 │   ├── App.tsx
-│   ├── App.css
-│   ├── index.css
 │   └── main.tsx
+├── netlify.toml          # Build + SPA redirects
 ├── index.html
-├── package.json
-├── tailwind.config.ts
 └── vite.config.ts
 ```
 
-## Local Development
+## Content sources
+
+All copy and metadata live in version-controlled TypeScript files:
+
+- [`src/content/profile.ts`](./src/content/profile.ts) — Site identity and experience
+- [`src/content/projects.ts`](./src/content/projects.ts) — Project catalog
+- [`src/content/posts.ts`](./src/content/posts.ts) — Notes and articles
+- [`src/content/types.ts`](./src/content/types.ts) — Shared types
+
+## Local development
 
 ```bash
+git clone https://github.com/Elli2022/frontend-project-archive.git
+cd frontend-project-archive
 npm install
 npm run dev
 ```
 
-Then open the local Vite URL shown in the terminal.
+Open the URL printed by Vite (default port `8080`).
 
-## Production Build
+### Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build to `dist/` |
+| `npm run preview` | Preview production build locally |
+| `npm run lint` | ESLint |
+| `npm test` | Vitest unit tests |
+
+## Deployment (Netlify)
+
+The site deploys from `main` via Netlify:
+
+1. **Build command:** `npm run build`
+2. **Publish directory:** `dist`
+3. **SPA routing:** `netlify.toml` rewrites all routes to `index.html`
+
+Manual deploy from the CLI:
 
 ```bash
 npm run build
+npx netlify deploy --prod --dir=dist
 ```
 
-## GitHub Pages Deployment
+## Related repositories
 
-The repo is set up for GitHub Pages with a dedicated Actions workflow.
-
-Deployment flow:
-
-1. Push to `main`
-2. GitHub Actions builds the Vite app
-3. The `dist/` output is published to GitHub Pages
-
-The Vite base path is configured for:
-
-```text
-/eleonora-field-notes/
-```
-
-## Relationship To Other Repos
-
-This project is intentionally separate from:
-
-- `eleonora-portfolio`
-  - the main public portfolio
-- `code-sanctuary`
-  - the private source of the design direction used here
-
-The goal was not to duplicate the portfolio, but to reuse the strongest design language for a more suitable public concept.
-
-## Future Improvements
-
-Likely next steps:
-
-- add screenshots or cover images for selected projects
-- add a small “before / after” format for rebuilt cases
-- write more notes around Git cleanup and project selection
-- add a filtered view for `rebuild`, `company-site`, `api`, and `archive`
+| Repository | Role |
+|---|---|
+| [`eleonora-portfolio`](https://github.com/Elli2022/eleonora-portfolio) | Main public portfolio |
+| [`code-sanctuary`](https://github.com/Elli2022/code-sanctuary) | Private source of the original design direction |
 
 ## Author
 
-Eleonora Nocentini Skoldebrink
+**Eleonora Nocentini Skoldebrink**
 
-- GitHub: [Elli2022](https://github.com/Elli2022)
+- GitHub: [@Elli2022](https://github.com/Elli2022)
 - Main portfolio: [eleonora-portfolio.netlify.app](https://eleonora-portfolio.netlify.app/)
+- Email: [eleonora.nocentini@gmail.com](mailto:eleonora.nocentini@gmail.com)
+
+## License
+
+This project is for portfolio and learning purposes. Project-specific assets and third-party content remain subject to their respective licenses.
